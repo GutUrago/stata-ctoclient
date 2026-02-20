@@ -43,7 +43,7 @@
 {title:Description}
 
 {pstd}
-{cmd:cto_form_data} creates a seamless pipeline between Stata and SurveyCTO. It uses the Stata package {browse "https://haghish.github.io/rcall/":rcall} to execute R in the background, authenticates with the SurveyCTO API via the {browse "https://CRAN.R-project.org/package=ctoclient":ctoclient R package}, pulls the specified form data, applies Stata labels, and loads the data cleanly into memory.
+{cmd:cto_form_data} creates a seamless pipeline between Stata and SurveyCTO. It uses the Stata package {browse "https://haghish.github.io/rcall/":rcall} to execute R in the background, authenticates with the SurveyCTO API via the {browse "https://CRAN.R-project.org/package=ctoclient":ctoclient} R package, pulls the specified form data, applies Stata labels, and loads the data cleanly into memory.
 
 {marker dependencies}{...}
 {title:Dependencies}
