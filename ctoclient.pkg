@@ -1,0 +1,8 @@
+v 1.0.0
+d ctoclient. Download SurveyCTO data via R (rcall).
+d 
+d Author: Gutama Girja Urago
+d Support: gurago@laterite.com
+d
+f cto_form_data.ado
+f cto_form_data.sthlp
