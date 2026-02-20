@@ -32,7 +32,7 @@ program define cto_form_data
 		github install haghish/rcall, stable
 	}
 
-	rcall_check ctoclient>=0.0.1, r(4.1.0)
+	rcall_check, r(4.1.0)
 	
 *--- 2. Format optional arguments
 	local r_tidy = cond(`tidy' == 1, "TRUE", "FALSE")
