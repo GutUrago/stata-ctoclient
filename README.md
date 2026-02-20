@@ -20,7 +20,7 @@ Before installing this Stata package, ensure your system meets the following req
 You can install the latest version of the package directly from GitHub by running the following command in your Stata command window:
 
 ```stata
-net install ctoclient, from("[https://raw.githubusercontent.com/Guturago/stata-ctoclient/main/](https://raw.githubusercontent.com/Guturago/stata-ctoclient/main/)")
+net install ctoclient, from("https://raw.githubusercontent.com/Guturago/stata-ctoclient/main")
 ```
 
 ## 📚 Documentation
