@@ -19,6 +19,8 @@ program define cto_form_data
 				Save(str)]
 
 *--- 1. Dependency Check
+
+	*--- Rcall and its dependencies
 	cap which rcall
 	if _rc {
 		display as result "{hline}"
@@ -34,11 +36,22 @@ program define cto_form_data
 
 	qui rcall_check, r(4.1.0)
 	
+	*--- ctoclient and its dependecies
+	local repos = "https://cran.rstudio.com/" // "https://cloud.r-project.org/"
+	cap qui rcall_check ctoclient>=0.1.0 haven>=2.5.0
+	if "`r(error)'" != "" {
+		rcall vanilla: install.packages(c("ctoclient", "haven"), repos = "`repos'")
+	}
+	
 *--- 2. Format optional arguments and flags
 
-	local lbl 		= cond(`label' == 1, 	"TRUE", "FALSE")
-	local tdy 		= cond(`tidy' == 1, 	"TRUE", "FALSE")
-	local enc 		= cond("`key'" != "", 	"TRUE", "FALSE")
+	local tdy 		= cond(`tidy' == 1, 				"TRUE", "FALSE")
+	local lbl 		= cond(`label' == 1 & `tidy' == 1, 	"TRUE", "FALSE")
+	local enc 		= cond("`key'" != "", 				"TRUE", "FALSE")
+	
+	if `label' == 1 & `tidy' == 0 {
+		di as err "You cannot label the data if not tidy! Use tidy(1)"
+	}
 
 	if "`key'" != "" {
 		if !fileexists("`key'") {
@@ -63,13 +76,7 @@ program define cto_form_data
 
 *--- 4. Call R in vanilla mode
 	rcall vanilla:																///
-		pkgs <- c("ctoclient", "sjlabelled");									///
-		loaded <- sapply(pkgs, function(pkg) require(pkg, quietly = TRUE, 		///
-							character.only = TRUE)); 							///
-		install.packages(pkgs[!loaded], quiet = TRUE, 							///
-					repos = "https://cloud.r-project.org/");					///
-		sapply(pkgs, function(pkg) require(pkg, quietly = TRUE, 				///
-							character.only = TRUE));							///
+		library(ctoclient);														///
 		cto_connect("`server'", "`username'", "`password'");					///
 		df <- if (`enc') {														///
 			cto_form_data("`formid'", "`key_path'", as.POSIXct(`date'), 		///
@@ -77,8 +84,9 @@ program define cto_form_data
 			} else {															///
 			cto_form_data("`formid'", NULL, as.POSIXct(`date'),	tidy = `tdy') 	///
 			};																	///
-		write_stata(df, "`dta_path'");											///
-		if (`lbl') cto_form_dofile("`formid'", "`do_path'")						///
+		if (`lbl') cto_form_dofile("`formid'", "`do_path'");					///
+		names(df) <- substr(names(df), 1, 32);									///
+		haven::write_dta(df, "`dta_path'")										///
 
 			
 *--- 5. Import the data and clear wd
