@@ -109,5 +109,5 @@ cto\_form\_data hh\_survey, server(myserver) username(me@org.org) pass("$sctopas
 
 ## Author
 
-Gutama Girja Urago, Laterite — gurago@laterite.com
+Gutama Girja Urago, Laterite
 
