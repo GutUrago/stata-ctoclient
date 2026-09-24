@@ -1,8 +1,40 @@
-v 1.0.0
-d ctoclient. Download SurveyCTO data via R (rcall).
-d 
-d Author: Gutama Girja Urago
-d Support: gurago@laterite.com
+v 3
+d ctoclient: Stata client for the SurveyCTO API
 d
+d Downloads data from a SurveyCTO server into Stata through the SurveyCTO
+d REST API. Stata companion of the R package ctoclient.
+d
+d The JSON parser is written in Mata, which makes ctoclient very fast,
+d memory-efficient and robust: it uses vectorised Mata operations instead of
+d Stata loops, reads the file in 8 MB pieces so memory use stays low for
+d large downloads, and keeps text in any language exactly as sent.
+d
+d cto_form_data            download the submissions of a form (wide JSON),
+d                          parse them in Mata and load them into Stata;
+d                          converts SurveyCTO date-times to %tc and checks KEY.
+d cto_form_data_attachment download the submissions and their media files
+d                          (images, audio, text audits, ...); only files not
+d                          yet in the media folder are downloaded.
+d
+d Supports encrypted forms (private key) and incremental downloads by date.
+d
+d Requires: Stata 15 or newer, and curl (included in Windows 10 version 1803
+d and later, macOS and most Linux distributions).
+d
+d KW: SurveyCTO
+d KW: survey data
+d KW: API
+d KW: JSON
+d KW: media
+d KW: data import
+d
+d Author: Gutama Girja Urago, Laterite
+d Support: email gurago@laterite.com
+d
+d Distribution-Date: 20260924
+d
+f ctoclient.sthlp
 f cto_form_data.ado
 f cto_form_data.sthlp
+f cto_form_data_attachment.ado
+f cto_form_data_attachment.sthlp

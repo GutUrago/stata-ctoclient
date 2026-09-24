@@ -1,3 +1,4 @@
-v 1.0.0
-d 'CTOCLIENT': A Stata package to download SurveyCTO data via R
-p cto_form_data
+v 3
+d Stata packages by Gutama Girja Urago, Laterite (gurago@laterite.com)
+d
+p ctoclient Stata client for the SurveyCTO API: download form data and media files
